@@ -20,27 +20,33 @@ def binarySearch(list, item, low=None, high=None, callNum=None):
     if callNum > maxTries:
         print('\nno such element "', item, '"\nor', maxTries,
               'tries are not enough to get index of element\nin', list, '(', listLength, 'elements )')
-        return
+        return None
 
     if low == None:
         low = 0
     if high == None:
         high = len(list) - 1
 
-    mid = int((low + high) / 2)
+    mid = math.floor((low + high) / 2)
     guess = list[mid]
     if guess == item:
-        print('\n[', callNum, '] low [', low, ']', list[low], '| mid [', mid, ']',
-          list[mid], '| high [', high, ']', list[high])
-        print('[', callNum, '] index of element', item, 'is', mid)
+        print('\n[', callNum, ']',
+              'low [', low, ']', list[low],
+              '| GUESS [', mid, ']', guess,
+              '| high [', high, ']', list[high])
+        print('[', callNum, '] index of element "', item, '" is', mid)
         return mid
+
+    print('\n[', callNum, ']',
+          'low [', low, ']', list[low],
+          '| GUESS [', mid, ']', guess,
+          '| high [', high, ']', list[high])
+
     if guess > item:
         high = mid - 1
     else:
         low = mid + 1
 
-    print('\n[', callNum, '] low [', low, ']', list[low], '| mid [', mid, ']',
-          list[mid], '| high [', high, ']', list[high])
     return binarySearch(list, item, low, high, callNum + 1)
 
 
@@ -64,5 +70,5 @@ def selectionSort(list):
 
 my_list = [1, 3, 5, 7, 9, 4, 13, 57, 74, 2, 0, -5, -3, 12, 23, -67, 99]
 
-binarySearch(my_list, -67)  # => 1
-# print(binarySearch(my_list, -1)) # => None
+binarySearch(my_list, 1)  # => 4
+# binarySearch(my_list, 8) # => None
